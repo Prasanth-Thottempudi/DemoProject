@@ -1,0 +1,13 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: ConfigServer
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Prasanth-Thottempudi/config-repo
+          username: Prasanth-Thottempudi
+          password: Adolf@git123
