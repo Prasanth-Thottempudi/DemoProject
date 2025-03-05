@@ -3,21 +3,17 @@ server:
 
 spring:
   application:
-    name: ApiGateway
+    name: API-Gateway
+
   cloud:
     gateway:
       routes:
-        - id: user-management
+        - id: USERMANAGEMENT
           uri: lb://USERMANAGEMENT
           predicates:
             - Path=/user/**
           filters:
-#            - JwtAuthenticationGatewayFilterFactory
-      discovery:
-        locator:
-          enabled: true
-  
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+            - AuthenticationFilter
+
+  main:
+    web-application-type: reactive

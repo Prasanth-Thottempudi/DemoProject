@@ -10,7 +10,7 @@ import com.usermanagement.request.EmailDetails;
 import com.usermanagement.service.EmailService;
 
 @RestController
-@RequestMapping("/email")
+@RequestMapping("/user/email")
 public class EmailController {
 
 	@Autowired
