@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +19,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/user")
 public class UsersController {
 
-	@GetMapping("/checking")
-	public String demo() {
-		return "checking";
-	}
+	
 	
 	 @PostMapping("/register")
 	    public ResponseEntity<?> registerUser(
