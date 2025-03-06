@@ -7,5 +7,6 @@ public class AddServiceRequest {
 	
 	private String serviceName;
 	private String serviceDescription;
+	private byte[] serviceImage;
 
 }

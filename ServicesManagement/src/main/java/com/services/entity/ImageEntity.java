@@ -9,18 +9,17 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="services")
+@Table(name="images")
 @Data
-public class ServicesEntity {
+public class ImageEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long serviceId;
-	private String serviceName;
-	private String serviceDescription;
+	private Integer imageId;
 	
-	private Integer serviceImageId;
-	
+	private String imageName;
+	@Lob
+	private byte[] imageData;
 	
 
 }
