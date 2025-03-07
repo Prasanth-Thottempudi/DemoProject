@@ -19,4 +19,6 @@ public class MinioConfig {
 
 		return minioClient;
 	}
+	
+	
 }
