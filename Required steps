@@ -1,0 +1,7 @@
+download minio minio.exe file from the minio server
+
+run the below command using powershell
+1.Invoke-WebRequest -Uri "https://dl.min.io/server/minio/release/windows-amd64/minio.exe" -OutFile "C:\minio.exe"
+2.setx MINIO_ROOT_USER admin
+3.setx MINIO_ROOT_PASSWORD admin
+4.C:\minio.exe server D:\Data --console-address ":9001"
