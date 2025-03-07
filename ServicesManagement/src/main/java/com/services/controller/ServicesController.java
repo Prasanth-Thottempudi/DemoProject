@@ -44,7 +44,11 @@ public class ServicesController {
 	public ResponseEntity<List<ServicesResponse>> getAllServices(){
 		List<ServicesResponse> allServices = service.findAllServices();
 		return ResponseEntity.ok(allServices);
-
 	}
+	
+//	@GetMapping("/get-all-types")
+//	public ResponseEntity<List<String>> getAllServiceTypes(){
+//		
+//	}
 	
 }

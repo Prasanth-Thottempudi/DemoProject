@@ -21,9 +21,7 @@ public class UserRegistrationRequest {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotNull(message = "Password cannot be null")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;
+    
 
     @NotNull(message = "Mobile number cannot be null")
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid mobile number format")
@@ -31,4 +29,9 @@ public class UserRegistrationRequest {
 
     @NotNull(message = "Enabled status cannot be null")
     private Boolean enabled;
+    
+    
+    
+    
+    
 }
