@@ -61,11 +61,9 @@ public class ServicesController {
 	}
 	
 	@PostMapping("/add-service")
-	public ResponseEntity<Response> addService(@RequestParam("serviceImage") MultipartFile serviceImage,@RequestParam("data") String data) throws IOException{
+	public ResponseEntity<Response> addService(@RequestParam("serviceImage") MultipartFile serviceImage,@RequestParam("data") String data) throws IOException, InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException{
 		ObjectMapper objectMapper = new ObjectMapper();
 	    AddServiceRequest request = objectMapper.readValue(data, AddServiceRequest.class);
-	    request.setServiceImage(serviceImage.getBytes());
-	    
 		Response addServiceResponse = service.addService(request,serviceImage);
 		return ResponseEntity.ok(addServiceResponse);
 	}
@@ -107,12 +105,10 @@ public class ServicesController {
 	@PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bucketName") String bucketName) {
         try {
-            // Check if the bucket exists
     		MinioClient minioClient = minioConfig.minioClient();
 
             boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
             if (!found) {
-                // Create the bucket if not found
                 minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
             }
 

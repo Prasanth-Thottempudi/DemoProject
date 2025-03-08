@@ -1,20 +1,19 @@
 package com.services.service.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.services.dao.ImageDao;
+import com.services.config.MinioConfig;
 import com.services.dao.ServicesDao;
-import com.services.entity.ImageEntity;
 import com.services.entity.ServicesEntity;
 import com.services.request.AddServiceRequest;
 import com.services.response.Response;
@@ -22,31 +21,50 @@ import com.services.response.ServicesResponse;
 import com.services.service.Services;
 import com.services.service.exceptions.ServiceAlreadyExistsException;
 
+import io.minio.BucketExistsArgs;
+import io.minio.MakeBucketArgs;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
+import io.minio.errors.ErrorResponseException;
+import io.minio.errors.InsufficientDataException;
+import io.minio.errors.InternalException;
+import io.minio.errors.InvalidResponseException;
+import io.minio.errors.ServerException;
+import io.minio.errors.XmlParserException;
+
 @Service
 public class ServicesImpl implements Services {
 
 	@Autowired
 	private ServicesDao servicesDao;
 
+	
+
 	@Autowired
-	private ImageDao imageDao;
+	private MinioConfig minioConfig;
 
 	@Override
-	public Response addService(AddServiceRequest request, MultipartFile serviceImage) throws IOException {
+	public Response addService(AddServiceRequest request, MultipartFile serviceImage) throws IOException, InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException {
 		Response response = new Response();
 		ServicesEntity servicesEntity = new ServicesEntity();
 		BeanUtils.copyProperties(request, servicesEntity);
-		ImageEntity image = new ImageEntity();
-		image.setImageName(serviceImage.getOriginalFilename());
-		image.setImageData(serviceImage.getBytes());
-		ImageEntity savedImage = imageDao.save(image);
 		Boolean existsByServiceName = servicesDao.existsByServiceName(request.getServiceName());
 		if (existsByServiceName) {
 			throw new ServiceAlreadyExistsException("service is already taken!");
 		}
-		servicesEntity.setServiceImageId(savedImage.getImageId());
+		MinioClient minioClient = minioConfig.minioClient();
+		String bucketName="nexgenhub";
+		boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+		if (!found) {
+			minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+		}
+		String fileName = request.getServiceName()+serviceImage.getOriginalFilename();
+		InputStream inputStream = serviceImage.getInputStream();
+		minioClient.putObject(PutObjectArgs.builder().bucket(bucketName).object(fileName)
+				.stream(inputStream, serviceImage.getSize(), -1).contentType(serviceImage.getContentType()).build());
+		servicesEntity.setServiceImageUrl(fileName);
 		ServicesEntity servicesSaved = servicesDao.save(servicesEntity);
-		if (servicesSaved.getServiceId() > 0L) {
+		if (servicesSaved.getServiceId()!=null) {
 			response.setResponseMessage("service added successfully");
 			response.setResponseStatus("1");
 		}
@@ -57,23 +75,13 @@ public class ServicesImpl implements Services {
 	public List<ServicesResponse> findAllServices() {
 		List<ServicesResponse> listOfServices = new ArrayList<>();
 		List<ServicesEntity> allServices = servicesDao.findAll();
-		List<ImageEntity> allImages = imageDao.findAll();
-		Map<Integer, Object> imageMap = allImages.stream()
-				.collect(Collectors.toMap(ImageEntity::getImageId, image -> image));
+		
 		allServices.forEach(service -> {
 			ServicesResponse response = new ServicesResponse();
-			response.setServiceId(service.getServiceId());
+//			response.setServiceId(service.getServiceId());
 			response.setServiceName(service.getServiceName());
 			response.setServiceDescription(service.getServiceDescription());
-			ImageEntity imageEntity = (ImageEntity) imageMap.get(service.getServiceImageId());
-			if (imageEntity != null) {
-				String base64Image = Base64.getEncoder().encodeToString(imageEntity.getImageData());
-				response.setServiceImage("image url");
-				response.setServiceImageName(imageEntity.getImageName());
-			} else {
-				response.setServiceImage(null);
-				response.setServiceImageName(null);
-			}
+			
 			listOfServices.add(response);
 		});
 		return listOfServices;

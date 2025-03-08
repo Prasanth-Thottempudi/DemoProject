@@ -14,7 +14,7 @@ public class MinioConfig {
 	public MinioClient minioClient() {
 		MinioClient minioClient = MinioClient.builder()
 		        .endpoint("http://192.168.0.134:9000") // or http://127.0.0.1:9000
-		        .credentials("admin", "admin123")
+		        .credentials("admin", "admin1234")
 		        .build();
 
 		return minioClient;
