@@ -26,5 +26,6 @@ public class ServicesEntity {
     private String serviceName;
     private String serviceDescription;
     private String serviceImageUrl;
+    private String serviceImageName;
 
 }

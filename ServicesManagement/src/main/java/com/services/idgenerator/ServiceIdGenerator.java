@@ -9,7 +9,12 @@ import jakarta.persistence.Query;
 
 public class ServiceIdGenerator implements IdentifierGenerator {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) {
         String prefix = "serv";
         // Use native SQL query to fetch the last service_id

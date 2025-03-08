@@ -68,6 +68,8 @@ public class ServicesController {
 		return ResponseEntity.ok(addServiceResponse);
 	}
 	
+	
+	
 	@GetMapping("/get-all-services")
 	public ResponseEntity<List<ServicesResponse>> getAllServices(){
 		List<ServicesResponse> allServices = service.findAllServices();
@@ -87,9 +89,6 @@ public class ServicesController {
 	    } else {
 	        System.out.println("Bucket 'nexgenhub' already exists.");
 	    }
-
-	
-        // Generate a pre-signed URL for viewing the file
         String presignedUrl = minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
                         .bucket("nexgenhub")

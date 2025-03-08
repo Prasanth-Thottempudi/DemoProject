@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class ServicesResponse {
 	
-	private Long serviceId;
+	private String serviceId;
 	public String serviceName;
 	private String serviceDescription;
-	private String serviceImage;
+	private String serviceImageUrl;
 	private String serviceImageName;
 
 }
