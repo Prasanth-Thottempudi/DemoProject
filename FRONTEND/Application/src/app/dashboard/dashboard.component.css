@@ -1,35 +1,11 @@
-.half-image {
-	background-size: cover;
-	background-position: center;
-	height: 100vh;
+img{
 	padding: 0;
-  }
-
-.half-image img{
-	width: 100%;
-	height: auto;
-	display: block;
-}
-.btn-margin{
-	margin-left: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
 }
 
-.h2-dashboard{
-	text-align: center;
-
+.section{
+	background-color: white;
+	padding-bottom: 10px;
 }
-.half-content {
-	display: flex;
-	flex-direction: column;
-	justify-content: center; /* Vertically centers content */
-	align-items: center; /* Horizontally centers content */
-	height: 80vh; /* Ensures the content takes the full height of the column */
-  }
 
-  .buttons h2 {
-	margin-bottom: 20px; /* Adds space between the heading and buttons */
-  }
-
-  .buttons .btn-margin {
-	margin-left: 10px; /* Adds space between Login and Register buttons */
-  }
