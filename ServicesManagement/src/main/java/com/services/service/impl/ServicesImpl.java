@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.services.config.MinioConfig;
 import com.services.dao.ServicesDao;
 import com.services.entity.ServicesEntity;
 import com.services.request.AddServiceRequest;
@@ -38,9 +37,6 @@ public class ServicesImpl implements Services {
 	private MinioServices minioServices;
 
 	
-
-	@Autowired
-	private MinioConfig minioConfig;
 
 	@Override
 	public Response addService(AddServiceRequest request, MultipartFile serviceImage) throws IOException, InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException {
