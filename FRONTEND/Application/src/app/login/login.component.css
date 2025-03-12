@@ -27,6 +27,8 @@ body, html {
     width: 100%;
     max-width: 400px;
     text-align: center;
+    justify-content: center;
+    
 }
 
 .login-form h2 {
@@ -140,3 +142,21 @@ button:hover {
 .signup-link a:hover {
     text-decoration: underline;
 }
+
+.center-container {
+	margin-top: 100px;
+	padding-top: 100px;
+	display: flex;
+	justify-content: center; /* Centers the content horizontally */
+	align-items: center;     /* Centers the content vertically */
+	height: 50vh;           /* Full viewport height */
+}
+
+/* .close-icon {
+	cursor: pointer;
+	font-size: 24px;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	color: #333;
+  } */

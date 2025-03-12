@@ -1,0 +1,172 @@
+<div class="center-container">
+
+
+
+	<div class="registration-form-container">
+		<mat-card class="registration-card">
+			<mat-icon class="close-icon" (click)="closeForm()">close</mat-icon>
+
+			<mat-card-header>
+				<mat-card-title>Register an Account</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<mat-horizontal-stepper [linear]="true" #stepper>
+					<mat-step [stepControl]="step1FormGroup">
+						<form [formGroup]="step1FormGroup">
+							<ng-template matStepLabel>Personal Information</ng-template>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Full Name</mat-label>
+								<input matInput formControlName="fullName" placeholder="Enter your full name"
+									required />
+								<mat-error *ngIf="step1FormGroup.controls['fullName'].invalid">
+									Full name is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Email</mat-label>
+								<input matInput formControlName="email" placeholder="Enter your email" required email />
+								<mat-error *ngIf="step1FormGroup.controls['email'].invalid">
+									Valid email is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Phone Number</mat-label>
+								<input matInput formControlName="phoneNumber" placeholder="Enter your phone number"
+									required />
+								<mat-error *ngIf="step1FormGroup.controls['phoneNumber'].invalid">
+									Phone number is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Date of Birth</mat-label>
+								<input matInput [matDatepicker]="picker" formControlName="dateOfBirth"
+									placeholder="Enter your date of birth" required />
+								<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+								<mat-datepicker #picker></mat-datepicker>
+								<mat-error *ngIf="step1FormGroup.controls['dateOfBirth'].invalid">
+									Date of birth is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Gender</mat-label>
+								<mat-select formControlName="gender" required>
+									<mat-option value="male">Male</mat-option>
+									<mat-option value="female">Female</mat-option>
+									<mat-option value="other">Other</mat-option>
+								</mat-select>
+								<mat-error *ngIf="step1FormGroup.controls['gender'].invalid">
+									Gender is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Nationality</mat-label>
+								<input matInput formControlName="nationality" placeholder="Enter your nationality"
+									required />
+								<mat-error *ngIf="step1FormGroup.controls['nationality'].invalid">
+									Nationality is required
+								</mat-error>
+							</mat-form-field>
+
+							<div class="actions">
+								<button mat-raised-button color="primary" matStepperNext
+									[disabled]="!step1FormGroup.valid">Next</button>
+							</div>
+						</form>
+					</mat-step>
+
+					<!-- Step 2: Business Details -->
+					<mat-step [stepControl]="step2FormGroup">
+						<form [formGroup]="step2FormGroup">
+							<ng-template matStepLabel>Business Information</ng-template>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Service Name</mat-label>
+								<input matInput formControlName="serviceName" placeholder="Enter service name"
+									required />
+								<mat-error *ngIf="step2FormGroup.controls['serviceName'].invalid">
+									Service name is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Business Name</mat-label>
+								<input matInput formControlName="businessName" placeholder="Enter business name"
+									required />
+								<mat-error *ngIf="step2FormGroup.controls['businessName'].invalid">
+									Business name is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Business Email</mat-label>
+								<input matInput formControlName="businessEmail" placeholder="Enter business email"
+									required email />
+								<mat-error *ngIf="step2FormGroup.controls['businessEmail'].invalid">
+									Valid business email is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Business Mobile Number</mat-label>
+								<input matInput formControlName="businessMobileNumber"
+									placeholder="Enter business mobile number" required />
+								<mat-error *ngIf="step2FormGroup.controls['businessMobileNumber'].invalid">
+									Business mobile number is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Business Region</mat-label>
+								<input matInput formControlName="businessRegion" placeholder="Enter business region"
+									required />
+								<mat-error *ngIf="step2FormGroup.controls['businessRegion'].invalid">
+									Business region is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Language</mat-label>
+								<input matInput formControlName="language" placeholder="Enter language" required />
+								<mat-error *ngIf="step2FormGroup.controls['language'].invalid">
+									Language is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Emergency Contact</mat-label>
+								<input matInput formControlName="emergencyContact" placeholder="Enter emergency contact"
+									required />
+								<mat-error *ngIf="step2FormGroup.controls['emergencyContact'].invalid">
+									Emergency contact is required
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="full-width" appearance="fill">
+								<mat-label>Business Description</mat-label>
+								<textarea matInput formControlName="businessDescription"
+									placeholder="Describe your business" required></textarea>
+								<mat-error *ngIf="step2FormGroup.controls['businessDescription'].invalid">
+									Business description is required
+								</mat-error>
+							</mat-form-field>
+
+							<div class="actions">
+								<button mat-raised-button color="primary" matStepperPrevious>Back</button>
+								<button mat-raised-button color="primary" [disabled]="!step2FormGroup.valid"
+									(click)="onSubmit()">Submit</button>
+							</div>
+						</form>
+					</mat-step>
+
+				</mat-horizontal-stepper>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+</div>

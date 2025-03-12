@@ -1,0 +1,39 @@
+.registration-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+  }
+  
+  .registration-card {
+	width: 400px;
+  }
+  
+  .full-width {
+	width: 100%;
+  }
+  
+  .actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+  }
+  
+
+  .center-container {
+	margin-top: 100px;
+	padding-top: 100px;
+	display: flex;
+	justify-content: center; /* Centers the content horizontally */
+	align-items: center;     /* Centers the content vertically */
+	height: 100vh;           /* Full viewport height */
+  }
+
+  .close-icon {
+	cursor: pointer;
+	font-size: 24px;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	color: #333;
+  }

@@ -1,1 +1,62 @@
-<h1>signup works</h1>
+<div class="center-container">
+
+
+<div class="registration-form-container">
+	<mat-card class="registration-card">
+		<mat-icon class="close-icon" (click)="closeForm()">close</mat-icon>
+
+	  <mat-card-header>
+		<mat-card-title>create an account</mat-card-title>
+	  </mat-card-header>
+	  <mat-card-content>
+		<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+		  <mat-form-field class="full-width" appearance="fill">
+			<mat-label>First Name</mat-label>
+			<input matInput formControlName="firstName" placeholder="Enter your first name" required />
+			<mat-error *ngIf="registrationForm.controls['firstName'].invalid">
+			  First name is required
+			</mat-error>
+		  </mat-form-field>
+  
+		  <mat-form-field class="full-width" appearance="fill">
+			<mat-label>Last Name</mat-label>
+			<input matInput formControlName="lastName" placeholder="Enter your last name" required />
+			<mat-error *ngIf="registrationForm.controls['lastName'].invalid">
+			  Last name is required
+			</mat-error>
+		  </mat-form-field>
+  
+		  <mat-form-field class="full-width" appearance="fill">
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email" placeholder="Enter your email" required email />
+			<mat-error *ngIf="registrationForm.controls['email'].invalid">
+			  Valid email is required
+			</mat-error>
+		  </mat-form-field>
+  
+		  <mat-form-field class="full-width" appearance="fill">
+			<mat-label>Password</mat-label>
+			<input matInput type="password" formControlName="password" placeholder="Enter your password" required />
+			<mat-error *ngIf="registrationForm.controls['password'].invalid">
+			  Password is required
+			</mat-error>
+		  </mat-form-field>
+  
+		  <mat-form-field class="full-width" appearance="fill">
+			<mat-label>Confirm Password</mat-label>
+			<input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" required />
+			<mat-error *ngIf="registrationForm.controls['confirmPassword'].invalid">
+			  Password confirmation is required
+			</mat-error>
+		  </mat-form-field>
+  
+		  <div class="actions">
+			<button mat-raised-button color="primary" [disabled]="!registrationForm.valid">Register</button>
+		  </div>
+		</form>
+	  </mat-card-content>
+	</mat-card>
+  </div>
+
+  </div>
+  

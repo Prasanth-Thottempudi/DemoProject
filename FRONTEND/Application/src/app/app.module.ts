@@ -16,6 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BusinessPatnerRegistrationFormComponent } from './business-patner-registration-form/business-patner-registration-form.component';
+import { MatOption } from '@angular/material/core';
+import { MatLineModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -30,6 +38,10 @@ const routes: Routes = [
     path: 'signup',
     component: RegistrationComponent,
   },
+  {
+    path: 'patner-registration',
+    component:BusinessPatnerRegistrationFormComponent
+  }
 ];
 @NgModule({
   declarations: [
@@ -40,6 +52,7 @@ const routes: Routes = [
     FooterComponent,
     LoginComponent,
     AdminDashboardComponent,
+    BusinessPatnerRegistrationFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +62,12 @@ const routes: Routes = [
     MatCardModule,
     MatFormFieldModule,
     FormsModule,
-ReactiveFormsModule,
+    MatSelectModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
   ],
