@@ -14,6 +14,5 @@ public class UserDetailsRequest extends ServiceBusinessDetailsRequest {
 	private Date dateOfBirth;
 	private String gender;
 	private String Nationality;
-	private String idProof;
 
 }

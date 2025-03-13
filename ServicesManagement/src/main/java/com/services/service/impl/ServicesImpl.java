@@ -72,7 +72,7 @@ public class ServicesImpl implements Services {
 			response.setServiceDescription(service.getServiceDescription());
 			String fileName=service.getServiceImageUrl();
 			try {
-				String presignedUrl=minioServices.getImageUrl(fileName);
+				String presignedUrl=minioServices.getImageUrl(fileName).getImageUrl();
 				response.setServiceImageUrl(presignedUrl);
 				response.setServiceImageName(service.getServiceImageName());
 			} catch (InvalidKeyException | ErrorResponseException | InsufficientDataException | InternalException

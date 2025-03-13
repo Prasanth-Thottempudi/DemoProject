@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +23,9 @@ import com.services.config.MinioConfig;
 import com.services.request.AddServiceRequest;
 import com.services.response.Response;
 import com.services.response.ServicesResponse;
+import com.services.service.MinioServices;
 import com.services.service.Services;
+import com.services.service.response.AddBusinessPatnerResponse;
 
 import io.minio.BucketExistsArgs;
 import io.minio.GetPresignedObjectUrlArgs;
@@ -47,7 +50,10 @@ public class ServicesController {
 	@Autowired
 	private  MinioConfig minioConfig;
 	
-	@GetMapping("/dashboard")
+	@Autowired
+	private MinioServices minioServices;
+	
+	@GetMapping("/minio")
 	public String services() throws InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException, IOException {
 		MinioClient minioClient = minioConfig.minioClient();
 
@@ -102,7 +108,7 @@ public class ServicesController {
     }
 	
 	@PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bucketName") String bucketName) {
+    public ResponseEntity<String> uploadFile(@RequestPart("file") MultipartFile file, @RequestPart("bucketName") String bucketName) {
         try {
     		MinioClient minioClient = minioConfig.minioClient();
 
@@ -111,7 +117,6 @@ public class ServicesController {
                 minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
             }
 
-            // Upload the file
             String fileName = file.getOriginalFilename();
             InputStream inputStream = file.getInputStream();
             minioClient.putObject(
@@ -130,6 +135,18 @@ public class ServicesController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage());
         }
     }
+	
+	@GetMapping("/dashboard")
+	public String getDashboard() {
+		return "service dashboard";
+	}
+	
+	
+	 
+	
+	
+	
+
 	
 
 	

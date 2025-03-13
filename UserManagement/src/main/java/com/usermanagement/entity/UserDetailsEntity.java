@@ -25,14 +25,13 @@ public class UserDetailsEntity {
     )
 	private String userId;
 	private String fullName;
-	private String username;
 	private String email;
 	private String phoneNumber;
 	private Date dateOfBirth;
 	private String gender;
 	private String Nationality;
 	
-	private String idProof;
+	private String idProofUrl;
 	
 	private String serviceBusinessId;
 	

@@ -1,8 +1,6 @@
 package com.usermanagement.exceptions;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +15,19 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleUserAlreadyException(UserAlreadyExistsException ex, WebRequest request) {
+		
+		ErrorResponse errorResponse=new ErrorResponse();
+		errorResponse.setTimestamp(LocalDateTime.now());
+		errorResponse.setStatus(HttpStatus.ALREADY_REPORTED.value());
+		errorResponse.setMessage(ex.getMessage());
+		errorResponse.setPath(request.getDescription(false));
+        return ResponseEntity.ok(errorResponse);
+        
+    }
+	
+	
+	@ExceptionHandler(BussinessPatnerException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessPatnerException(BussinessPatnerException ex, WebRequest request) {
 		
 		ErrorResponse errorResponse=new ErrorResponse();
 		errorResponse.setTimestamp(LocalDateTime.now());

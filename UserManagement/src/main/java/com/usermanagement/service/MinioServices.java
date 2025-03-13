@@ -1,4 +1,4 @@
-package com.services.service;
+package com.usermanagement.service;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -6,8 +6,8 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.services.response.MinioServiceResponse;
-import com.services.response.Response;
+import com.usermanagement.response.MinioServiceResponse;
+import com.usermanagement.response.Response;
 
 import io.minio.errors.ErrorResponseException;
 import io.minio.errors.InsufficientDataException;

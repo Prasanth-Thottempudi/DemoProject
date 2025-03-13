@@ -1,4 +1,4 @@
-package com.services.service.impl;
+package com.usermanagement.service.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.services.config.MinioConfig;
-import com.services.response.MinioServiceResponse;
-import com.services.response.Response;
-import com.services.service.MinioServices;
+import com.usermanagement.config.MinioConfig;
+import com.usermanagement.response.MinioServiceResponse;
+import com.usermanagement.response.Response;
+import com.usermanagement.service.MinioServices;
 
 import io.minio.BucketExistsArgs;
 import io.minio.GetPresignedObjectUrlArgs;
