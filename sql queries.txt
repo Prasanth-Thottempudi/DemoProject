@@ -1,0 +1,10 @@
+alter table services.business_patner_details
+MODIFY COLUMN business_logo_url varchar(1000);
+
+alter table services.business_patner_details
+MODIFY COLUMN business_license_proof_url varchar(1000);
+
+alter table usermanagement.user_details
+MODIFY COLUMN id_proof_url varchar(1000);
+
+====================14/03/2025=======================
