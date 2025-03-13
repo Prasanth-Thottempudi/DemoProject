@@ -6,28 +6,28 @@
 			<!-- <mat-icon class="close-icon" (click)="closeForm()">close</mat-icon> -->
 
 			<h2>Login</h2>
-			<form>
+			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
 				<div class="input-group">
 					<label for="email">Email</label>
-					<input type="email" id="email" placeholder="Enter your email" required>
+					<input  formControlName="username" id="email" placeholder="Enter your email" required>
 				</div>
 				<div class="input-group">
 					<label for="password">Password</label>
-					<input type="password" id="password" placeholder="Enter your password" required>
+					<input  formControlName="password" id="password" placeholder="Enter your password" required>
 				</div>
 				<button type="submit">Login</button>
 			</form>
-			<div class="social-login">
+			<!-- <div class="social-login">
 				<p>Or login with:</p>
 				<div class="social-icons">
 					<a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
 					<a href="#" class="google"><i class="fab fa-google"></i></a>
 					<a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
 				</div>
-			</div>
-			<div class="signup-link">
+			</div> -->
+			<!-- <div class="signup-link">
 				<p>Don't have an account? <a href="#">Sign up</a></p>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

@@ -29,13 +29,6 @@ public class UsersController {
 	@Autowired
 	private UserService userService;
 	
-
-
-	
-	
-
-	 
-	 
 	 @PostMapping("/add-role")
 	 public ResponseEntity<String> addRole(@RequestBody RolesEntity roles){
 		 rolesDao.save(roles);
@@ -70,7 +63,6 @@ public class UsersController {
 	     ObjectMapper objectMapper = new ObjectMapper();
 	     UserDetailsAndBusinessRequest req = objectMapper.readValue(data, UserDetailsAndBusinessRequest.class);
 	     Response res = userService.addBusinessPatner(serviceImage, businessLogo, businessLicenseProof, req);
-
 	     return ResponseEntity.ok(res);
 	 }
 
