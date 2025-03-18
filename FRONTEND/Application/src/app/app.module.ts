@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
+import { AdminDataTableComponent } from './admin-data-table/admin-data-table.component';
 
 const routes: Routes = [
   {
@@ -51,8 +52,13 @@ const routes: Routes = [
     component: AdminDashboardComponent,
     children: [
       {
-        path:'profile',component:ProfileComponent
-      }
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'data-table',
+        component: AdminDataTableComponent,
+      },
     ],
   },
 ];
@@ -69,6 +75,7 @@ const routes: Routes = [
     SideNavComponent,
     ProfileComponent,
     AdminHeaderComponent,
+    AdminDataTableComponent,
   ],
   imports: [
     BrowserModule,
