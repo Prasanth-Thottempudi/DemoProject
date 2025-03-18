@@ -10,7 +10,7 @@ import com.usermanagement.request.AuthenticationDetailsRequest;
 
 @RestController
 @RequestMapping("/user/auth")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
 	
 	@PostMapping("/login")

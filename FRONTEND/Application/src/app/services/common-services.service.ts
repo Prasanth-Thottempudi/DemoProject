@@ -9,6 +9,6 @@ export class CommonServicesService {
   constructor(private http: HttpClient) {}
 
   userLogin(payload:any):Observable<any>{
-    return this.http.post('localhost:9091/user/auth/login',payload)
+    return this.http.post('http://localhost:9091/user/auth/login', payload);
   }
 }
