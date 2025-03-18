@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonServicesService } from '../services/common-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,11 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private serv: CommonServicesService) {
+  constructor(
+    private fb: FormBuilder,
+    private serv: CommonServicesService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       username: [''],
       password: [''],
@@ -24,16 +29,17 @@ export class LoginComponent {
     this.serv.userLogin(this.loginForm.value);
     console.log('called');
 
-    
-      const newData = { name: 'Sample Data' };
-      this.serv.userLogin(this.loginForm.value).subscribe(
-        (response) => {
-          console.log('Data added successfully:', response);
-        },
-        (error) => {
-          console.error('Error adding data:', error);
+    const newData = { name: 'Sample Data' };
+    this.serv.userLogin(this.loginForm.value).subscribe(
+      (response) => {
+        console.log('Data added successfully:', response);
+        if (response) {
+          this.router.navigate(['/admin-dashboard']);
         }
-      );
-    }
-  
+      },
+      (error) => {
+        console.error('Error adding data:', error);
+      }
+    );
+  }
 }

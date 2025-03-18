@@ -25,6 +25,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 const routes: Routes = [
   {
@@ -41,8 +44,17 @@ const routes: Routes = [
   },
   {
     path: 'patner-registration',
-    component:BusinessPatnerRegistrationFormComponent
-  }
+    component: BusinessPatnerRegistrationFormComponent,
+  },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    children: [
+      {
+        path:'profile',component:ProfileComponent
+      }
+    ],
+  },
 ];
 @NgModule({
   declarations: [
@@ -54,6 +66,9 @@ const routes: Routes = [
     LoginComponent,
     AdminDashboardComponent,
     BusinessPatnerRegistrationFormComponent,
+    SideNavComponent,
+    ProfileComponent,
+    AdminHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +86,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

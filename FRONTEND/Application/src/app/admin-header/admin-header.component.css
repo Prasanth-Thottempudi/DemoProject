@@ -1,0 +1,54 @@
+/* Header styling with darker background */
+.header {
+    background: linear-gradient(90deg, #8fa3d2, #3369d5); /* Darker blue gradient matching the sidebar */
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
+    border-radius: 8px;
+}
+
+/* Logo Styling */
+
+
+/* Icons (logout & notification) styling */
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.header-icons i {
+    font-size: 1.8em;
+    color: #ffffff; /* White for contrast against dark background */
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.header-icons i:hover {
+    color: #ffd700; /* Hover effect matching the logo's gradient */
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff7f50, #ffd700, #32cd32, #00bfff, #ff7f50); /* More colors for a flowing effect */
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: colorflow 5s ease-in-out infinite; /* Adding animation */
+}
+
+/* Keyframes for the color flow effect */
+@keyframes colorflow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
