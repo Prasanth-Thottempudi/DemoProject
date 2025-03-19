@@ -29,6 +29,11 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { AdminDataTableComponent } from './admin-data-table/admin-data-table.component';
+import { AddServiceComponent } from './add-service/add-service.component';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { ServiceDialogComponent } from './service-dialog/service-dialog.component';
+
 
 const routes: Routes = [
   {
@@ -59,6 +64,10 @@ const routes: Routes = [
         path: 'data-table',
         component: AdminDataTableComponent,
       },
+      {
+        path:'services',
+        component:AddServiceComponent
+      }
     ],
   },
 ];
@@ -76,6 +85,8 @@ const routes: Routes = [
     ProfileComponent,
     AdminHeaderComponent,
     AdminDataTableComponent,
+    AddServiceComponent,
+    ServiceDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +105,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

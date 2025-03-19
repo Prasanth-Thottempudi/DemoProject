@@ -26,7 +26,6 @@ import com.services.response.Response;
 import com.services.response.ServicesResponse;
 import com.services.service.MinioServices;
 import com.services.service.Services;
-import com.services.service.response.AddBusinessPatnerResponse;
 
 import io.minio.BucketExistsArgs;
 import io.minio.GetPresignedObjectUrlArgs;

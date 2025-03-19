@@ -1,77 +1,116 @@
 .container {
 	font-family: 'Roboto', sans-serif;
-	color: #333;
-  }
-  
-  h3 {
+	color: #050000;
+	padding: 15px;
+}
+
+h3 {
 	font-size: 24px;
 	font-weight: bold;
 	color: #444;
 	margin-bottom: 20px;
-  }
-  
-  .table {
+}
+
+.table {
 	width: 100%;
 	margin-bottom: 1rem;
 	background-color: transparent;
 	border-radius: 8px;
 	overflow: hidden;
-  }
-  
-  .table thead {
+}
+
+.table thead {
 	background: linear-gradient(90deg, #7b5de3, #22d3ee);
 	color: #fff;
-  }
-  
-  .table th, .table td {
+}
+
+.table th, .table td {
 	padding: 1rem;
 	text-align: left;
 	border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .table tbody tr {
+	word-wrap: break-word; /* Ensures text wraps in smaller views */
+}
+
+.table tbody tr {
 	transition: background-color 0.3s ease;
-  }
-  
-  .table tbody tr:hover {
+}
+
+.table tbody tr:hover {
 	background-color: rgba(34, 211, 238, 0.2);
-  }
-  
-  .table tbody td img {
+}
+
+.table tbody td img {
 	border-radius: 50%;
-  }
-  
-  .table a {
+	max-width: 100%; /* Ensures logo images resize properly */
+	height: auto;
+}
+
+.table a {
 	color: #007bff;
 	text-decoration: none;
-  }
-  
-  .table a:hover {
+}
+
+.table a:hover {
 	text-decoration: underline;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
 	.table th, .table td {
-	  font-size: 14px;
-	  padding: 0.75rem;
+		font-size: 14px;
+		padding: 0.75rem;
 	}
-  }
-  
-  .button-container {
+
+	.table thead {
+		display: none; /* Hide table header for smaller screens */
+	}
+
+	.table, .table tbody, .table tr, .table td {
+		display: block;
+		width: 100%;
+	}
+
+	.table tr {
+		margin-bottom: 15px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	.table td {
+		text-align: right;
+		position: relative;
+		padding-left: 50%;
+	}
+
+	.table td::before {
+		content: attr(data-label); /* Use custom data-label for each cell */
+		position: absolute;
+		left: 0;
+		width: 50%;
+		padding-left: 15px;
+		font-weight: bold;
+		text-align: left;
+	}
+
+	.table tbody td img {
+		width: 40px;
+		height: 40px; /* Ensure smaller image size on mobile */
+	}
+}
+
+.button-container {
 	display: flex;
-	justify-content: center; /* Center the buttons horizontally */
-	gap: 10px; /* Space between buttons */
-	margin: 20px 0; /* Add margin for better spacing */
-	flex-wrap: wrap; /* Ensure buttons wrap in case of overflow */
-  }
-  
-  .button {
+	justify-content: center;
+	gap: 10px;
+	margin: 20px 0;
+	flex-wrap: wrap;
+}
+
+.button {
 	display: inline-block;
 	padding: 10px;
 	font-size: 16px;
 	font-weight: bold;
 	text-align: center;
-	text-decoration: none;
 	color: #fff;
 	background: linear-gradient(90deg, #7b5de3, #22d3ee);
 	border-radius: 25px;
@@ -79,12 +118,18 @@
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease;
 	cursor: pointer;
-	width: 120px; /* Set width to make buttons uniform */
-  }
-  
+	width: 120px;
+}
 
-  .button:active {
+.button:active {
 	transform: translateY(2px);
 	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  }
-  
+}
+
+/* Media query to make buttons responsive */
+@media (max-width: 576px) {
+	.button {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}

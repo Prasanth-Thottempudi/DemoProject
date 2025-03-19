@@ -17,4 +17,8 @@ export class CommonServicesService {
       'http://localhost:9092/services/business/approval-requested-services'
     );
   }
+
+  getAllServices(): Observable<any> {
+    return this.http.get('http://localhost:9092/services/get-all-services');
+  }
 }
