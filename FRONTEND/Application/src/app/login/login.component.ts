@@ -33,8 +33,9 @@ export class LoginComponent {
     this.serv.userLogin(this.loginForm.value).subscribe(
       (response) => {
         console.log('Data added successfully:', response);
-        if (response) {
-          this.router.navigate(['/admin-dashboard']);
+        localStorage.setItem('id', '123');
+        if (response.roleName === 'USER' && response.loginApproval === true) {
+          this.router.navigate(['/seller-dashboard']);
         }
       },
       (error) => {

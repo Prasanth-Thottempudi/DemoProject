@@ -4,6 +4,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th>Business Id</th>
 					<th>Business Name</th>
 					<th>Region</th>
 					<th>Service</th>
@@ -17,6 +18,7 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let request of approvalRequests">
+					<td>{{request.id}}</td>
 					<td>{{ request.businessName }}</td>
 					<td>{{ request.businessRegion }}</td>
 					<td>{{ request.serviceName }}</td>
@@ -24,8 +26,8 @@
 					<td>{{ request.businessEmail }}</td>
 					<td><a [href]="request.businessProofUrl" target="_blank">View Proof</a></td>
 					<td><img [src]="request.businessLogoUrl" alt="Logo" width="50" height="50"></td>
-					<td><button (click)="approveRequest()" class="button">Approve</button></td>
-					<td><button class="button">Reject</button></td>
+					<td><button (click)="approveRequest(request)" class="button">Approve</button></td>
+					<td><button (click)="approveRequest(request)" class="button">Reject</button></td>
 				</tr>
 			</tbody>
 		</table>

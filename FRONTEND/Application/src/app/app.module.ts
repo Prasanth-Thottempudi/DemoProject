@@ -33,7 +33,11 @@ import { AddServiceComponent } from './add-service/add-service.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceDialogComponent } from './service-dialog/service-dialog.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ToastrModule } from 'ngx-toastr';
+import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
+import { ReciepesComponent } from './seller/reciepes/reciepes.component';
+import { OrdersComponent } from './seller/orders/orders.component';
 
 const routes: Routes = [
   {
@@ -65,11 +69,29 @@ const routes: Routes = [
         component: AdminDataTableComponent,
       },
       {
-        path:'services',
-        component:AddServiceComponent
-      }
+        path: 'services',
+        component: AddServiceComponent,
+      },
     ],
   },
+  {
+    path:'seller-dashboard',
+    component:SellerDashboardComponent,
+    children:[
+      {
+        path:'reciepe',
+        component:ReciepesComponent
+      },
+      {
+        path:'orders',
+        component:OrdersComponent
+      },
+      {
+        path:'profile',
+        component:ProfileComponent
+      }
+    ]
+  }
 ];
 @NgModule({
   declarations: [
@@ -87,9 +109,12 @@ const routes: Routes = [
     AdminDataTableComponent,
     AddServiceComponent,
     ServiceDialogComponent,
+    SellerDashboardComponent,
+    ReciepesComponent,
+    OrdersComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,ToastrModule,
     AppRoutingModule,
     MatButtonModule,
     MatInputModule,
@@ -105,7 +130,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

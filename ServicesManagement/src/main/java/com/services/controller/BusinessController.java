@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.services.request.AddBusinessPatnerRequest;
+import com.services.request.ApprovalRequest;
+import com.services.response.ApprovalResponse;
 import com.services.response.RequestedBusinessApprovalsResponse;
 import com.services.service.BusinessPatnerService;
 import com.services.service.response.AddBusinessPatnerResponse;
@@ -42,5 +44,9 @@ public class BusinessController {
 		 return ResponseEntity.ok(allPendingBusinesses);
 	}
 	
-//	@PutMapping("/business-approval-request")
+	@PutMapping("/business-approval-request")
+	public ResponseEntity<ApprovalResponse> appovalRequest(@RequestBody ApprovalRequest request){
+		ApprovalResponse response=businessPatnerService.approveServiceRequest(request);
+		return ResponseEntity.ok(response);		
+	}
 }

@@ -21,4 +21,16 @@ export class CommonServicesService {
   getAllServices(): Observable<any> {
     return this.http.get('http://localhost:9092/services/get-all-services');
   }
+
+  businessApprovalRequest(payload: any): Observable<any> {
+    return this.http.put(
+      'http://localhost:9092/services/business/business-approval-request',
+      payload
+    );
+  }
+
+  getAllRecipesByBusinessId(businessId: string): Observable<any> {
+    return this.http.get(`http://localhost:9093/food-delivery/get-all-recipes/${businessId}`);
+  }
+  
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.usermanagement.request.AuthenticationDetailsRequest;
+import com.usermanagement.response.AuthenticationResponse;
 
 @RestController
 @RequestMapping("/user/auth")
@@ -14,8 +15,11 @@ import com.usermanagement.request.AuthenticationDetailsRequest;
 public class AuthenticationController {
 	
 	@PostMapping("/login")
-	public Boolean login(@RequestBody AuthenticationDetailsRequest request ) {
-		return true;
+	public AuthenticationResponse login(@RequestBody AuthenticationDetailsRequest request ) {
+		AuthenticationResponse res=new AuthenticationResponse();
+		res.setLoginApproval(true);
+		res.setRoleName("USER");
+		return res;
 	}
 
 }
