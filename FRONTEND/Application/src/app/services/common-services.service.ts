@@ -32,5 +32,9 @@ export class CommonServicesService {
   getAllRecipesByBusinessId(businessId: string): Observable<any> {
     return this.http.get(`http://localhost:9093/food-delivery/get-all-recipes/${businessId}`);
   }
+
+  getAllRecipes():Observable<any>{
+    return this.http.get('http://localhost:9093/food-delivery/get-all-recipes')
+  }
   
 }

@@ -17,6 +17,7 @@ import com.fooddelivery.dao.RecipeDao;
 import com.fooddelivery.entity.Recipe;
 import com.fooddelivery.request.recipeRequest;
 import com.fooddelivery.response.MinioServiceResponse;
+import com.fooddelivery.response.ReciepeListResponse;
 import com.fooddelivery.response.ReciepeResponse;
 import com.fooddelivery.services.MinioServices;
 import com.fooddelivery.services.RecipeService;
@@ -30,17 +31,19 @@ import io.minio.errors.XmlParserException;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
-	
+
 	@Autowired
 	private RecipeDao recipeDao;
-	
+
 	@Autowired
 	private MinioServices minioServices;
 
 	@Override
-	public ReciepeResponse addRecipe(recipeRequest request, MultipartFile file) throws InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException, IOException {
-		ReciepeResponse response=new ReciepeResponse();
-		Recipe recipe=new Recipe();
+	public ReciepeResponse addRecipe(recipeRequest request, MultipartFile file) throws InvalidKeyException,
+			ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException,
+			NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException, IOException {
+		ReciepeResponse response = new ReciepeResponse();
+		Recipe recipe = new Recipe();
 		BeanUtils.copyProperties(request, recipe);
 		recipe.setCreatedDate(LocalDateTime.now());
 		String fileName = file.getOriginalFilename();
@@ -55,34 +58,58 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<ReciepeResponse> getAllServicesByBusinessId(String businessId) {
-		 List<ReciepeResponse> response=new ArrayList<>();
-		 List<Recipe> allRecipes = recipeDao.findAll();
-		 response=allRecipes.stream()
-		     .filter(i -> businessId.equals(i.getBusinessId().toString()))  // Assuming businessId is a String
-		     .map(i -> {
-		         ReciepeResponse res = new ReciepeResponse();
-		         res.setReciepeId(i.getRecipeId());
-		         
-		         try {
-					MinioServiceResponse imageUrl = minioServices.getImageUrl(i.getRecipeImageUrl());
-			         res.setRecipeUrl(imageUrl.getImageUrl());
+		List<ReciepeResponse> response = new ArrayList<>();
+		List<Recipe> allRecipes = recipeDao.findAll();
+		response = allRecipes.stream().filter(i -> businessId.equals(i.getBusinessId().toString()))
+				.map(i -> {
+					ReciepeResponse res = new ReciepeResponse();
+					res.setReciepeId(i.getRecipeId());
 
-				} catch (InvalidKeyException | ErrorResponseException | InsufficientDataException | InternalException
-						| InvalidResponseException | NoSuchAlgorithmException | XmlParserException | ServerException
-						| IllegalArgumentException | IOException e) {
-					e.printStackTrace();
-				}
-		         res.setRecipeName(i.getRecipeId());  // Assuming recipe name is not provided, setting recipeId instead
-		         res.setRecipeDescription(i.getRecipeDescription());
-		         res.setRecipePrice(i.getRecipePrice());
-		         res.setBusinessId(i.getBusinessId());
-		         return res;
-		     })
-		     .collect(Collectors.toList());
-		 
-		 return response;
+					try {
+						MinioServiceResponse imageUrl = minioServices.getImageUrl(i.getRecipeImageUrl());
+						res.setRecipeUrl(imageUrl.getImageUrl());
+
+					} catch (InvalidKeyException | ErrorResponseException | InsufficientDataException
+							| InternalException | InvalidResponseException | NoSuchAlgorithmException
+							| XmlParserException | ServerException | IllegalArgumentException | IOException e) {
+						e.printStackTrace();
+					}
+					res.setRecipeName(i.getRecipeId()); // Assuming recipe name is not provided, setting recipeId
+														// instead
+					res.setRecipeDescription(i.getRecipeDescription());
+					res.setRecipePrice(i.getRecipePrice());
+					res.setBusinessId(i.getBusinessId());
+					return res;
+				}).collect(Collectors.toList());
+
+		return response;
 
 	}
-	
+
+	@Override
+	public ReciepeListResponse getAllRecipes() {
+		List<Recipe> allRecipes = recipeDao.findAll();
+
+		List<ReciepeResponse> reciepeList = allRecipes.stream().map(i -> {
+		    ReciepeResponse res = new ReciepeResponse();
+		    res.setReciepeId(i.getRecipeId());
+		    try {
+		        MinioServiceResponse imageUrl = minioServices.getImageUrl(i.getRecipeImageUrl());
+		        res.setRecipeUrl(imageUrl.getImageUrl());
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    res.setRecipeName(i.getRecipeId());  
+		    res.setRecipeDescription(i.getRecipeDescription());
+		    res.setRecipePrice(i.getRecipePrice());
+		    res.setBusinessId(i.getBusinessId());
+		    return res;
+		}).collect(Collectors.toList());
+
+		ReciepeListResponse finalResponse = new ReciepeListResponse("Success", "200", reciepeList);
+
+
+		return finalResponse;
+	}
 
 }

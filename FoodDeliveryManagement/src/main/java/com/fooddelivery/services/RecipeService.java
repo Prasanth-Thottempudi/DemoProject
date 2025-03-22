@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fooddelivery.request.recipeRequest;
+import com.fooddelivery.response.ReciepeListResponse;
 import com.fooddelivery.response.ReciepeResponse;
 
 import io.minio.errors.ErrorResponseException;
@@ -22,6 +23,8 @@ public interface RecipeService {
 	ReciepeResponse addRecipe(recipeRequest request, MultipartFile file) throws InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, ServerException, XmlParserException, IllegalArgumentException, IOException;
 
 	List<ReciepeResponse> getAllServicesByBusinessId(String businessId);
+
+	ReciepeListResponse getAllRecipes();
 	
 	
 

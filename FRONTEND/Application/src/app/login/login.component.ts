@@ -35,7 +35,7 @@ export class LoginComponent {
         console.log('Data added successfully:', response);
         localStorage.setItem('id', '123');
         if (response.roleName === 'USER' && response.loginApproval === true) {
-          this.router.navigate(['/seller-dashboard']);
+          this.router.navigate(['/user-dashboard']);
         }
       },
       (error) => {

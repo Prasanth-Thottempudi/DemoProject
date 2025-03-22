@@ -1,0 +1,72 @@
+.fixed-image {
+	height: 200px;
+	object-fit: cover;
+	width: 100%;
+  }
+  
+  .card-body {
+	flex-grow: 1;
+  }
+  
+  .card-body .d-flex {
+	align-items: flex-end;
+  }
+  
+  .card-body .card-title {
+	font-weight: bold;
+  }
+  
+  .card-body .text-muted {
+	margin-bottom: auto;
+  }
+  
+  .food-menu-heading {
+	text-align: center;
+	margin: 10px 0;
+	padding: 10px;
+	background: linear-gradient(to right, #00c6ff, #0072ff);
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	display: inline-block;
+  }
+  
+  .food-menu-heading h1 {
+	color: white;
+	font-size: 2rem;
+	font-weight: 600;
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .food-menu-section {
+	padding: 0 15px;
+  }
+  
+  .food-items-container {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 20px;
+  }
+  
+  .quantity-selector {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+  }
+  
+  .quantity-selector button {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 5px 10px;
+  }
+  
+  .quantity-selector span {
+	font-size: 16px;
+	font-weight: bold;
+  }
+  

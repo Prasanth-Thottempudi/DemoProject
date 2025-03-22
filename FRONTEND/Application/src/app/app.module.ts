@@ -38,6 +38,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
 import { ReciepesComponent } from './seller/reciepes/reciepes.component';
 import { OrdersComponent } from './seller/orders/orders.component';
+import { UserDashboardComponent } from './users/user-dashboard/user-dashboard.component';
+import { FoodComponent } from './users/food/food.component';
+import { WishlistComponent } from './users/wishlist/wishlist.component';
+import { CartComponent } from './users/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -75,12 +79,34 @@ const routes: Routes = [
     ],
   },
   {
-    path:'seller-dashboard',
-    component:SellerDashboardComponent,
+    path: 'seller-dashboard',
+    component: SellerDashboardComponent,
+    children: [
+      {
+        path: 'reciepe',
+        component: ReciepesComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+    ],
+  },
+  {
+    path: 'user-dashboard',
+    component: UserDashboardComponent,
     children:[
       {
-        path:'reciepe',
-        component:ReciepesComponent
+        path:'food',
+        component:FoodComponent
+      },
+      {
+        path:'wishlist',
+        component:WishlistComponent
       },
       {
         path:'orders',
@@ -91,7 +117,7 @@ const routes: Routes = [
         component:ProfileComponent
       }
     ]
-  }
+  },
 ];
 @NgModule({
   declarations: [
@@ -112,9 +138,14 @@ const routes: Routes = [
     SellerDashboardComponent,
     ReciepesComponent,
     OrdersComponent,
+    UserDashboardComponent,
+    FoodComponent,
+    WishlistComponent,
+    CartComponent,
   ],
   imports: [
-    BrowserModule,ToastrModule,
+    BrowserModule,
+    ToastrModule,
     AppRoutingModule,
     MatButtonModule,
     MatInputModule,
@@ -131,7 +162,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fooddelivery.request.recipeRequest;
+import com.fooddelivery.response.ReciepeListResponse;
 import com.fooddelivery.response.ReciepeResponse;
 import com.fooddelivery.response.Response;
 import com.fooddelivery.services.RecipeService;
@@ -58,4 +59,12 @@ public class ReciepeController {
 		List<ReciepeResponse> res=recipeService.getAllServicesByBusinessId(businessId);
 		return ResponseEntity.ok(res);
 	}
+	
+	@GetMapping("/get-all-recipes")
+	public ResponseEntity<ReciepeListResponse> getAllRecipes(){
+		ReciepeListResponse res=recipeService.getAllRecipes();
+		return ResponseEntity.ok(res);
+	}
+	
+	
 }
