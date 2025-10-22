@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+  constructor(private router: Router) {}
+
   Email: string = 'support@eshop.com';
   categories = [
     { name: 'Pizza', image: '../assets/biryani.png' },
@@ -68,4 +71,8 @@ export class DashboardComponent {
       image: '../assets/pizza.png',
     },
   ];
+
+    onLogin(): void {
+    this.router.navigate(['/login']);
+  }
 }

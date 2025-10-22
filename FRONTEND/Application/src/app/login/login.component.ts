@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  password: any;
+  username: any;
+
   closeForm() {}
 
   loginForm: FormGroup;
@@ -25,22 +28,13 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
-    this.serv.userLogin(this.loginForm.value);
-    console.log('called');
+    console.log('login form ');
+  }
 
-    const newData = { name: 'Sample Data' };
-    this.serv.userLogin(this.loginForm.value).subscribe(
-      (response) => {
-        console.log('Data added successfully:', response);
-        localStorage.setItem('id', '123');
-        if (response.roleName === 'USER' && response.loginApproval === true) {
-          this.router.navigate(['/user-dashboard']);
-        }
-      },
-      (error) => {
-        console.error('Error adding data:', error);
-      }
-    );
+  onCancel() {
+    this.router.navigate(['/']);
+  }
+  onLogin() {
+    this.router.navigate(['/user-dashboard']);
   }
 }
