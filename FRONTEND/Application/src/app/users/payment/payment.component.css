@@ -1,0 +1,107 @@
+.payment-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a2e, #162447);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-card {
+  background: #1f1f3a;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 400px;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,123,255,0.3);
+}
+
+.payment-card h2 {
+  text-align: center;
+  color: #00f0ff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px #00f0ff;
+}
+
+.payment-section {
+  margin-bottom: 1.5rem;
+
+  h3 {
+    color: #00f0ff;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: #2c2c4a;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s all;
+
+      &:hover {
+        background: #3a3a5a;
+      }
+
+      input[type="radio"] {
+        accent-color: #00f0ff;
+        transform: scale(1.2);
+      }
+
+      .upi-logo,
+      .card-box,
+      .other-option {
+        font-weight: 600;
+      }
+
+      .add-new {
+        color: #ffb347;
+      }
+
+      .card-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.payment-action {
+  display: flex;
+  justify-content: center;
+
+  .pay-btn {
+    width: 100%;
+    padding: 1rem 0;
+    background: linear-gradient(135deg, #00f0ff, #007bff);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 240, 255, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, #007bff, #00f0ff);
+      box-shadow: 0 6px 15px rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: scale(0.98);
+      background: linear-gradient(135deg, #0066cc, #00e6ff);
+    }
+  }
+}

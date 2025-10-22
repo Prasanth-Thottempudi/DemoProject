@@ -42,6 +42,7 @@ import { UserDashboardComponent } from './users/user-dashboard/user-dashboard.co
 import { FoodComponent } from './users/food/food.component';
 import { WishlistComponent } from './users/wishlist/wishlist.component';
 import { CartComponent } from './users/cart/cart.component';
+import { PaymentComponent } from './users/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -99,24 +100,28 @@ const routes: Routes = [
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
-    children:[
+    children: [
       {
-        path:'food',
-        component:FoodComponent
+        path: 'food',
+        component: FoodComponent,
       },
       {
-        path:'wishlist',
-        component:WishlistComponent
+        path: 'cart',
+        component: CartComponent,
       },
       {
-        path:'orders',
-        component:OrdersComponent
+        path: 'orders',
+        component: OrdersComponent,
       },
       {
-        path:'profile',
-        component:ProfileComponent
-      }
-    ]
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent,
+      },
+    ],
   },
 ];
 @NgModule({
@@ -142,6 +147,7 @@ const routes: Routes = [
     FoodComponent,
     WishlistComponent,
     CartComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

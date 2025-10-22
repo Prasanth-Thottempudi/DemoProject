@@ -58,6 +58,5 @@ export class FoodComponent implements OnDestroy {
 
   ngOnDestroy(): void {
 
-    alert('do u want to save the data ')
   }
 }
