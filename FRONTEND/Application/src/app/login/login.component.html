@@ -1,33 +1,21 @@
-<div class="center-container">
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p>Sign in to continue</p>
 
+    <form>
+      <div class="input-group">
+        <input type="text" required />
+        <label>Username</label>
+      </div>
 
-	<div class="login-container">
-		<div class="login-form ">
-			<!-- <mat-icon class="close-icon" (click)="closeForm()">close</mat-icon> -->
+      <div class="input-group">
+        <input type="password" required />
+        <label>Password</label>
+      </div>
 
-			<h2>Login</h2>
-			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-				<div class="input-group">
-					<label for="email">Email</label>
-					<input  formControlName="username" id="email" placeholder="Enter your email" required>
-				</div>
-				<div class="input-group">
-					<label for="password">Password</label>
-					<input  formControlName="password" id="password" placeholder="Enter your password" required>
-				</div>
-				<button type="submit">Login</button>
-			</form>
-			<!-- <div class="social-login">
-				<p>Or login with:</p>
-				<div class="social-icons">
-					<a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
-					<a href="#" class="google"><i class="fab fa-google"></i></a>
-					<a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-				</div>
-			</div> -->
-			<!-- <div class="signup-link">
-				<p>Don't have an account? <a href="#">Sign up</a></p>
-			</div> -->
-		</div>
-	</div>
+      <button type="submit">Login</button>
+      <p class="forgot">Forgot Password?</p>
+    </form>
+  </div>
 </div>
