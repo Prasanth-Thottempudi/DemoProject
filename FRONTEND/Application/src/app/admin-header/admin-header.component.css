@@ -1,54 +1,56 @@
-/* Header styling with darker background */
+/* Header */
 .header {
-    background: linear-gradient(90deg, #8fa3d2, #3369d5); /* Darker blue gradient matching the sidebar */
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
-    border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #1a1a2e, #162447);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 2px 10px rgba(0,123,255,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* Logo Styling */
+/* Logo */
+.header .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff;
+}
 
-
-/* Icons (logout & notification) styling */
+/* Header icons */
 .header-icons {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .header-icons i {
-    font-size: 1.8em;
-    color: #ffffff; /* White for contrast against dark background */
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
+  font-size: 1.4rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .header-icons i:hover {
-    color: #ffd700; /* Hover effect matching the logo's gradient */
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 10px #00f0ff, 0 0 20px #007bff;
+  transform: translateY(-2px);
 }
 
-.logo {
-    font-size: 2em;
-    font-weight: bold;
-    background: linear-gradient(90deg, #ff7f50, #ffd700, #32cd32, #00bfff, #ff7f50); /* More colors for a flowing effect */
-    background-size: 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: colorflow 5s ease-in-out infinite; /* Adding animation */
-}
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-/* Keyframes for the color flow effect */
-@keyframes colorflow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  .header-icons {
+    gap: 1rem;
+  }
 }
-
