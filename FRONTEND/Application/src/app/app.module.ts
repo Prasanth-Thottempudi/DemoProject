@@ -45,6 +45,7 @@ import { PaymentComponent } from './users/payment/payment.component';
 import { OrdersComponent } from './users/orders/orders.component';
 import { TrackingComponent } from './users/tracking/tracking.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,10 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
       },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+      },
     ],
   },
   {
@@ -127,6 +132,10 @@ const routes: Routes = [
         path: 'tracking',
         component: TrackingComponent,
       },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+      },
     ],
   },
 ];
@@ -155,6 +164,7 @@ const routes: Routes = [
     CartComponent,
     PaymentComponent,
     TrackingComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

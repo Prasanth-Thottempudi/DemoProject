@@ -3,7 +3,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
@@ -21,11 +21,16 @@ export class TrackingComponent implements AfterViewInit {
   vectorSource!: VectorSource;
   routeLayer!: VectorLayer;
 
-  // Fixed start point: Hyderabad HiTech City
-  startCoords: [number, number] = [78.3773, 17.4426]; // [lng, lat]
-  userCoords: [number, number] | null = null; // to be set from GPS
+  startCoords: [number, number] = [78.3773, 17.4426]; // Hyderabad HiTech City [lng, lat]
+  userCoords: [number, number] | null = null;
 
   etaMinutes: number | null = null;
+
+  bikeFeature!: Feature;
+  routeFeature!: Feature;
+
+  reached: boolean = false;
+  customerPhone = '+919876543210';
 
   ngAfterViewInit() {
     this.initMap();
@@ -61,11 +66,11 @@ export class TrackingComponent implements AfterViewInit {
       }),
     });
 
-    // Add marker for start location (HiTech City) with bike icon
-    const startFeature = new Feature({
+    // Bike marker
+    this.bikeFeature = new Feature({
       geometry: new Point(fromLonLat(this.startCoords)),
     });
-    startFeature.setStyle(
+    this.bikeFeature.setStyle(
       new Style({
         image: new Icon({
           src: 'https://twemoji.maxcdn.com/v/latest/72x72/1f6f5.png',
@@ -74,7 +79,7 @@ export class TrackingComponent implements AfterViewInit {
         }),
       })
     );
-    this.vectorSource.addFeature(startFeature);
+    this.vectorSource.addFeature(this.bikeFeature);
   }
 
   private getUserLocationAndRoute() {
@@ -87,7 +92,7 @@ export class TrackingComponent implements AfterViewInit {
       (position) => {
         this.userCoords = [position.coords.longitude, position.coords.latitude];
 
-        // Add user location marker (blue dot)
+        // User marker (blue dot)
         const userFeature = new Feature({
           geometry: new Point(fromLonLat(this.userCoords)),
         });
@@ -108,7 +113,6 @@ export class TrackingComponent implements AfterViewInit {
         this.map.getView().setCenter(fromLonLat([centerLng, centerLat]));
         this.map.getView().setZoom(13);
 
-        // Request route from OSRM API
         this.getRouteFromOSRM(this.startCoords, this.userCoords);
       },
       () => alert('Unable to retrieve your location')
@@ -127,21 +131,103 @@ export class TrackingComponent implements AfterViewInit {
         }
 
         const route = data.routes[0];
-
-        // Show ETA (duration in seconds -> minutes)
         this.etaMinutes = Math.round(route.duration / 60);
 
-        // Convert geojson route coords to OpenLayers coordinates
         const routeCoords = route.geometry.coordinates.map(
           (coord: [number, number]) => fromLonLat(coord)
         );
 
-        const routeFeature = new Feature({
+        // Create routeFeature once and add to vectorSource
+        if (this.routeFeature) {
+          this.vectorSource.removeFeature(this.routeFeature);
+        }
+        this.routeFeature = new Feature({
           geometry: new LineString(routeCoords),
         });
+        this.vectorSource.addFeature(this.routeFeature);
 
-        this.vectorSource.addFeature(routeFeature);
+        this.animateBike(routeCoords, route.duration);
       })
       .catch(() => alert('Failed to fetch route'));
+  }
+
+  private animateBike(routeCoords: number[][], durationSeconds: number) {
+    let index = 0;
+    const stepTime = 1000; // 1 second per step approx
+    const totalSteps = routeCoords.length;
+
+    const moveStep = () => {
+      if (index >= totalSteps) {
+        this.reached = true;
+        return;
+      }
+
+      // Move bike to next coord
+      (this.bikeFeature.getGeometry() as Point).setCoordinates(
+        routeCoords[index]
+      );
+
+      // Update route line to show remaining path only
+      const remainingCoords = routeCoords.slice(index);
+      (this.routeFeature.getGeometry() as LineString).setCoordinates(
+        remainingCoords
+      );
+
+      // Calculate distance to user
+      if (this.userCoords) {
+        const bikeLonLat = toLonLat(routeCoords[index]);
+        const dist = this.calculateDistance(
+          bikeLonLat[1],
+          bikeLonLat[0],
+          this.userCoords[1],
+          this.userCoords[0]
+        );
+        if (dist < 0.02) {
+          this.reached = true;
+          return;
+        }
+      }
+
+      // Update ETA in minutes dynamically
+      const remainingSteps = totalSteps - index;
+      const timePerStep = durationSeconds / totalSteps;
+      this.etaMinutes = Math.ceil((remainingSteps * timePerStep) / 60);
+
+      index++;
+      setTimeout(moveStep, stepTime);
+    };
+
+    moveStep();
+  }
+
+  private calculateDistance(
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): number {
+    const R = 6371; // Earth radius in km
+    const dLat = this.deg2rad(lat2 - lat1);
+    const dLon = this.deg2rad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) *
+        Math.cos(this.deg2rad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  private deg2rad(deg: number): number {
+    return deg * (Math.PI / 180);
+  }
+
+  callCustomer() {
+    window.open(`tel:${this.customerPhone}`, '_self');
+  }
+
+  messageCustomer() {
+    window.open(`sms:${this.customerPhone}`, '_self');
   }
 }
