@@ -6,12 +6,21 @@
 			<div class="profile">Hi, User</div>
 
 			<div class="action-buttons">
-				<button class="action-btn">
-					<i class="fas fa-building"></i> Business Registration
-				</button>
-				<button class="action-btn">
-					<i class="fas fa-user-plus"></i> Registration
-				</button>
+
+
+				<li class="action-btn">
+					<a routerLink="/business-partner-registration" class="nav-link" routerLinkActive="active">
+						<i class="fas fa-building"></i> Business Registration
+					</a>
+				</li>
+
+
+				<li class="action-btn">
+					<a routerLink="/registration" class="nav-link" routerLinkActive="active">
+						<i class="fas fa-user-plus"></i> Registration
+					</a>
+				</li>
+
 				<button class="action-btn" (click)="onLogin()">
 					<i class="fas fa-sign-in-alt"></i> Login
 				</button>

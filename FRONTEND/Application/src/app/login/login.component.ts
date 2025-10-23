@@ -35,6 +35,6 @@ export class LoginComponent {
     this.router.navigate(['/']);
   }
   onLogin() {
-    this.router.navigate(['/user-dashboard']);
+    this.router.navigate(['/user-dashboard/food']);
   }
 }

@@ -50,6 +50,8 @@ import Swiper from 'swiper';
 import { CustomersupportComponent } from './customersupport/customersupport.component';
 
 import { LivechatComponent } from './livechat/livechat.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { SmartOrderAssistantComponent } from './smart-order-assistant/smart-order-assistant.component';
 
 const routes: Routes = [
   {
@@ -61,13 +63,14 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'signup',
-    component: RegistrationComponent,
-  },
-  {
-    path: 'patner-registration',
+    path: 'business-partner-registration',
     component: BusinessPatnerRegistrationFormComponent,
   },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
+  },
+
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
@@ -145,6 +148,10 @@ const routes: Routes = [
         component: LivechatComponent,
       },
       {
+        path: 'wallet',
+        component: WalletComponent,
+      },
+      {
         path: 'settings',
         component: SettingsComponent,
       },
@@ -179,6 +186,8 @@ const routes: Routes = [
     SettingsComponent,
     CustomersupportComponent,
     LivechatComponent,
+    WalletComponent,
+    SmartOrderAssistantComponent,
   ],
   imports: [
     BrowserModule,

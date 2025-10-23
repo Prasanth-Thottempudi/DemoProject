@@ -1,14 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -16,29 +7,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent {
-  registrationForm: FormGroup;
+  constructor(private router: Router) {}
 
- 
+  currentStep = 1;
 
-  ngOnInit(): void {}
+  // Form fields
+  fullName = '';
+  email = '';
+  phoneNumber = '';
+  dob = '';
+  gender = '';
+  nationality = '';
+  serviceName = '';
+  businessDetails = '';
+  language = '';
+  username = '';
+  password = '';
+  confirmPassword = '';
 
- 
+  nextStep() {
+    if (this.currentStep < 3) this.currentStep++;
+    this.updateStepDisplay();
+  }
 
-  constructor(private fb: FormBuilder,private router:Router) {
-    this.registrationForm = this.fb.group({
-      firstName: ['firstname', [Validators.required]],
-      lastName: ['lastname', [Validators.required]],
-      email: ['demo@gmail.com', [Validators.required]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+  prevStep() {
+    if (this.currentStep > 1) this.currentStep--;
+    this.updateStepDisplay();
+  }
+
+  updateStepDisplay() {
+    const steps = document.querySelectorAll('.step-content');
+    steps.forEach((step, index) => {
+      step.classList.toggle('active', index === this.currentStep - 1);
     });
   }
 
-  onSubmit(): void {
-    console.log(this.registrationForm.value);
+  onSubmit() {
+    // Registration logic here
+    console.log('Registration submitted', {
+      fullName: this.fullName,
+      email: this.email,
+      phoneNumber: this.phoneNumber,
+      username: this.username,
+    });
   }
 
-  closeForm(){
-    this.router.navigate(['/'])
+  cancel() {
+    this.router.navigate(['/']);
   }
 }
