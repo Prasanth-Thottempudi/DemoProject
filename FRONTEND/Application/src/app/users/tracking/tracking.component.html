@@ -1,1 +1,5 @@
-<div id="map"></div>
+<div id="map" class="map-container"></div>
+
+<div *ngIf="etaMinutes !== null" class="eta-box">
+	Estimated time to reach your location: <strong>{{ etaMinutes }} mins</strong>
+</div>
