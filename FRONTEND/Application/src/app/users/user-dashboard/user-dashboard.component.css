@@ -79,3 +79,40 @@
     display: none;
   }
 }
+/* Sidebar styles */
+#sidebar {
+  position: fixed;   /* Keep it fixed on the left */
+  top: 0;
+  left: 0;
+  height: 100vh;     /* Full viewport height */
+  width: 250px;      /* Adjust width as needed */
+  background: #1f1f3a;
+  padding-top: 2rem;
+  overflow-y: auto;  /* Add vertical scroll if menu is long */
+}
+
+#sidebar ul.components {
+  padding-left: 0;
+}
+
+#sidebar .nav-link {
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+  background-color: #ff6600;
+  border-radius: 8px;
+}
+
+/* Content area */
+#content {
+  margin-left: 250px; /* Same as sidebar width */
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #162447);
+}
