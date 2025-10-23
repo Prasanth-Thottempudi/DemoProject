@@ -47,6 +47,9 @@ import { TrackingComponent } from './users/tracking/tracking.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { SettingsComponent } from './settings/settings.component';
 import Swiper from 'swiper';
+import { CustomersupportComponent } from './customersupport/customersupport.component';
+
+import { LivechatComponent } from './livechat/livechat.component';
 
 const routes: Routes = [
   {
@@ -134,6 +137,14 @@ const routes: Routes = [
         component: TrackingComponent,
       },
       {
+        path: 'customer-support',
+        component: CustomersupportComponent,
+      },
+      {
+        path: 'live-chat',
+        component: LivechatComponent,
+      },
+      {
         path: 'settings',
         component: SettingsComponent,
       },
@@ -166,9 +177,11 @@ const routes: Routes = [
     PaymentComponent,
     TrackingComponent,
     SettingsComponent,
+    CustomersupportComponent,
+    LivechatComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     ToastrModule,
     AppRoutingModule,
     MatButtonModule,
@@ -188,8 +201,6 @@ const routes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     GoogleMapsModule,
-    
-    
   ],
   providers: [],
   bootstrap: [AppComponent],
