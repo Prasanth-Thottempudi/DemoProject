@@ -30,6 +30,8 @@ export class TrackingComponent implements AfterViewInit {
   routeFeature!: Feature;
 
   reached: boolean = false;
+  loadingRoute: boolean = false;
+
   customerPhone = '+919876543210';
 
   ngAfterViewInit() {
@@ -54,12 +56,7 @@ export class TrackingComponent implements AfterViewInit {
 
     this.map = new Map({
       target: 'map',
-      layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
-        this.routeLayer,
-      ],
+      layers: [new TileLayer({ source: new OSM() }), this.routeLayer],
       view: new View({
         center: fromLonLat(this.startCoords),
         zoom: 13,
@@ -88,6 +85,8 @@ export class TrackingComponent implements AfterViewInit {
       return;
     }
 
+    this.loadingRoute = true; // show loading spinner
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.userCoords = [position.coords.longitude, position.coords.latitude];
@@ -115,7 +114,10 @@ export class TrackingComponent implements AfterViewInit {
 
         this.getRouteFromOSRM(this.startCoords, this.userCoords);
       },
-      () => alert('Unable to retrieve your location')
+      () => {
+        this.loadingRoute = false;
+        alert('Unable to retrieve your location');
+      }
     );
   }
 
@@ -126,7 +128,7 @@ export class TrackingComponent implements AfterViewInit {
       .then((res) => res.json())
       .then((data) => {
         if (data.code !== 'Ok') {
-          alert('Error fetching route');
+          this.loadingRoute = true; // keep showing waiting
           return;
         }
 
@@ -137,18 +139,21 @@ export class TrackingComponent implements AfterViewInit {
           (coord: [number, number]) => fromLonLat(coord)
         );
 
-        // Create routeFeature once and add to vectorSource
         if (this.routeFeature) {
           this.vectorSource.removeFeature(this.routeFeature);
         }
+
         this.routeFeature = new Feature({
           geometry: new LineString(routeCoords),
         });
         this.vectorSource.addFeature(this.routeFeature);
 
         this.animateBike(routeCoords, route.duration);
+        this.loadingRoute = false; // hide loading popup
       })
-      .catch(() => alert('Failed to fetch route'));
+      .catch(() => {
+        this.loadingRoute = true; // show waiting popup if route fetch fails
+      });
   }
 
   private animateBike(routeCoords: number[][], durationSeconds: number) {
@@ -173,7 +178,7 @@ export class TrackingComponent implements AfterViewInit {
         remainingCoords
       );
 
-      // Calculate distance to user
+      // Check distance to user
       if (this.userCoords) {
         const bikeLonLat = toLonLat(routeCoords[index]);
         const dist = this.calculateDistance(
@@ -188,7 +193,7 @@ export class TrackingComponent implements AfterViewInit {
         }
       }
 
-      // Update ETA in minutes dynamically
+      // Update ETA
       const remainingSteps = totalSteps - index;
       const timePerStep = durationSeconds / totalSteps;
       this.etaMinutes = Math.ceil((remainingSteps * timePerStep) / 60);

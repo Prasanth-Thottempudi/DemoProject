@@ -1,34 +1,82 @@
-<div class="container py-4">
-	<div class="row">
+<div class="food-wrapper">
 
+	<!-- Section 1: Search bar -->
+	<div class="search-section">
+		<input type="text" placeholder="Search for food..." [(ngModel)]="searchQuery" />
+		<button class="mic-btn"><i class="fas fa-microphone"></i></button>
+	</div>
+	<!-- Section 4: Categories -->
+	<div class="category-section">
+		<h2>Categories</h2>
+		<div class="category-list">
+			<div class="category-card" *ngFor="let cat of categories">
+				<img [src]="cat.img" alt="{{cat.name}}">
+				<p>{{cat.name}}</p>
+			</div>
+		</div>
+	</div>
 
-		<div *ngFor="let recipe of recipeList" class="col-lg-4 col-md-6 mb-4">
-			<div class="card shadow-sm h-100 d-flex flex-column">
-				<img [src]="recipe.recipeUrl" class="card-img-top img-fluid fixed-image"
-					alt="{{ recipe.recipeName }}" />
-				<div class="card-body d-flex flex-column justify-content-between">
-					<div>
-						<h6 class="text-uppercase">{{ recipe.reciepeId }}</h6>
-						<h5 class="card-title">{{ recipe.recipeName }}</h5>
-						<p class="card-text text-muted">{{ recipe.recipeDescription }}</p>
-					</div>
-					<div class="d-flex justify-content-between align-items-center mt-3">
-						<span class="text-primary font-weight-bold">${{ recipe.recipePrice }}</span>
+	<!-- Section 2: Offers -->
+	<div class="offer-section">
+		<h2>Offers</h2>
+		<div class="offer-list" #offerList>
+			<div class="offer-card" *ngFor="let offer of offers">
+				<img [src]="offer.img" alt="{{ offer.title }}">
+				<p>{{ offer.title }}</p>
+			</div>
+		</div>
+	</div>
 
-						<!-- Conditional rendering for Add to Cart / Quantity selector -->
-						<div *ngIf="!recipe.isAddedToCart; else quantitySelector">
-							<button class="btn btn-primary btn-sm" (click)="addToCart(recipe)">Add to Cart</button>
-						</div>
-						<ng-template #quantitySelector>
-							<div class="quantity-selector">
-								<button (click)="decrementQuantity(recipe)" class="btn btn-light">-</button>
-								<span>{{ recipe.quantity }}</span>
-								<button (click)="incrementQuantity(recipe)" class="btn btn-light">+</button>
-							</div>
-						</ng-template>
-					</div>
+	<!-- Section 3: Reorder heading -->
+	<div class="reorder-section">
+		<h2>Reorder Your Favorites</h2>
+		<div class="food-grid">
+			<div class="food-card" *ngFor="let food of foods">
+				<img [src]="food.img" alt="{{food.name}}">
+				<h3>{{ food.name }}</h3>
+				<p>{{ food.description }}</p>
+				<div class="price-add">
+					<span class="price">₹{{ food.price }}</span>
+					<button class="add-btn"><i class="fas fa-plus"></i> Add</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+
+	<!-- Section 5: Restaurants -->
+	<div class="restaurant-section">
+		<h2>Popular Restaurants</h2>
+		<div class="restaurant-grid">
+			<div class="restaurant-card" *ngFor="let rest of restaurants">
+				<img [src]="rest.img" alt="{{ rest.name }}">
+				<div class="restaurant-info">
+					<h3>{{ rest.name }}</h3>
+					<p class="location"><i class="fas fa-map-marker-alt"></i> {{ rest.location }}</p>
+					<p class="rating"><i class="fas fa-star"></i> {{ rest.rating }} / 5</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Section 5: Filter & Sort -->
+	<div class="filter-sort-section">
+		<div class="filter-by">
+			<label>Filter By:</label>
+			<select [(ngModel)]="selectedFilter">
+				<option *ngFor="let f of filters" [value]="f">{{f}}</option>
+			</select>
+		</div>
+		<div class="sort-by">
+			<label>Sort By:</label>
+			<select [(ngModel)]="selectedSort">
+				<option *ngFor="let s of sorters" [value]="s">{{s}}</option>
+			</select>
+		</div>
+	</div>
+	<!-- Section 6: Restaurants -->
+
+
+
 </div>

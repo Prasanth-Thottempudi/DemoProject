@@ -46,6 +46,7 @@ import { OrdersComponent } from './users/orders/orders.component';
 import { TrackingComponent } from './users/tracking/tracking.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { SettingsComponent } from './settings/settings.component';
+import Swiper from 'swiper';
 
 const routes: Routes = [
   {
@@ -167,7 +168,7 @@ const routes: Routes = [
     SettingsComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     ToastrModule,
     AppRoutingModule,
     MatButtonModule,
@@ -187,6 +188,8 @@ const routes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     GoogleMapsModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
