@@ -8,15 +8,24 @@
 			<div class="payment-options">
 				<label>
 					<input type="radio" name="upi" />
-					<span class="upi-logo">PhonePe</span>
+					<span class="upi-logo">
+						<img src="../../../assets/phonepe.png" alt="PhonePe Icon" />
+						PhonePe
+					</span>
 				</label>
 				<label>
 					<input type="radio" name="upi" />
-					<span class="upi-logo">iMobile UPI</span>
+					<span class="upi-logo">
+						<img src="../../../assets/imobile.png" alt="iMobile Icon" />
+						iMobile UPI
+					</span>
 				</label>
 				<label>
 					<input type="radio" name="upi" />
-					<span class="upi-logo">Airtel UPI</span>
+					<span class="upi-logo">
+						<img src="../../../assets/airtel.png" alt="Airtel Icon" />
+						Airtel UPI
+					</span>
 				</label>
 				<label>
 					<input type="radio" name="upi" />
@@ -32,6 +41,7 @@
 				<label>
 					<input type="radio" name="card" />
 					<span class="card-box">
+						<img src="../../../assets/creditcard.png" alt="Visa Icon" />
 						<p>**** **** **** 1234</p>
 						<small>Valid Thru 12/26</small>
 					</span>
@@ -49,26 +59,47 @@
 			<div class="payment-options">
 				<label>
 					<input type="radio" name="other" />
-					<span class="other-option">Wallets</span>
+					<span class="other-option">
+						<img src="../../../assets/wallets.png" alt="Wallet Icon" />
+						Wallets
+					</span>
 				</label>
 				<label>
 					<input type="radio" name="other" />
-					<span class="other-option">Netbanking</span>
+					<span class="other-option">
+						<img src="../../../assets/netbanking.png" alt="Netbanking Icon" />
+						Netbanking
+					</span>
 				</label>
 				<label>
 					<input type="radio" name="other" />
-					<span class="other-option">Cred Pay</span>
+					<span class="other-option">
+						<img src="../../../assets/credpay.png" alt="Cred Icon" />
+						Cred Pay
+					</span>
 				</label>
 				<label>
 					<input type="radio" name="other" />
-					<span class="other-option">Pay on Delivery</span>
+					<span class="other-option">
+						<img src="../../../assets/cashondelivery.png" alt="COD Icon" />
+						Pay on Delivery
+					</span>
 				</label>
 			</div>
 		</section>
 
 		<!-- Section 4: Pay Button -->
 		<section class="payment-section payment-action">
-			<button class="pay-btn">Make Payment</button>
+			<button class="pay-btn" (click)="openModal()">Make Payment</button>
 		</section>
+	</div>
+</div>
+
+<div class="modal" *ngIf="isModalOpen">
+	<div class="modal-content">
+		<div class="success-icon">✔</div>
+		<h2>Order Placed!</h2>
+		<p>Your payment was successful. Thank you for your order.</p>
+		<button class="close-btn" (click)="closeModal()">OK</button>
 	</div>
 </div>

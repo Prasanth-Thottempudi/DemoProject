@@ -37,12 +37,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToastrModule } from 'ngx-toastr';
 import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
 import { ReciepesComponent } from './seller/reciepes/reciepes.component';
-import { OrdersComponent } from './seller/orders/orders.component';
 import { UserDashboardComponent } from './users/user-dashboard/user-dashboard.component';
 import { FoodComponent } from './users/food/food.component';
 import { WishlistComponent } from './users/wishlist/wishlist.component';
 import { CartComponent } from './users/cart/cart.component';
 import { PaymentComponent } from './users/payment/payment.component';
+import { OrdersComponent } from './users/orders/orders.component';
+import { TrackingComponent } from './users/tracking/tracking.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 const routes: Routes = [
   {
@@ -121,6 +123,10 @@ const routes: Routes = [
         path: 'payment',
         component: PaymentComponent,
       },
+      {
+        path: 'tracking',
+        component: TrackingComponent,
+      },
     ],
   },
 ];
@@ -148,6 +154,7 @@ const routes: Routes = [
     WishlistComponent,
     CartComponent,
     PaymentComponent,
+    TrackingComponent,
   ],
   imports: [
     BrowserModule,
@@ -169,6 +176,7 @@ const routes: Routes = [
     HttpClientModule,
     MatDialogModule,
     MatSnackBarModule,
+    GoogleMapsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
