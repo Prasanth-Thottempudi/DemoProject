@@ -152,6 +152,11 @@ const routes: Routes = [
         component: WalletComponent,
       },
       {
+        path: 'smart-order-assistant',
+        component: SmartOrderAssistantComponent,
+
+      },
+      {
         path: 'settings',
         component: SettingsComponent,
       },
